@@ -1,0 +1,32 @@
+.content {
+	margin-top: 50px;
+	display: none;
+}
+.content.shown {
+	display: block;
+}
+
+.content-box {
+	display: flex;
+	justify-content: space-around;
+}
+
+#content-code, #content-live {
+	width: 50%;
+	min-height: 250px; #TODO responsive
+}
+#content-control-time-slider {
+	margin-left: 15px;
+}
+#content-control-time-slider .slider-selection {
+	background: #BABABA;
+}
+#content-control .btn {
+	min-width: 100px;
+}
+
+.tabs {
+	margin-top: 10px;
+	border: 1px lightgrey solid;
+	border-radius: 5px;
+}

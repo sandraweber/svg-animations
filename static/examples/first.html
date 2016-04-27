@@ -1,0 +1,23 @@
+
+<div id="code-includes">
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/easing/EasePack.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/CSSPlugin.min.js"></script>
+</div>
+
+<div id="code-svg">
+	<svg width="500" height="300"  >
+		<rect id="svgRectangle" class="animated" x="100" y="120" width="220" height="80" fill="#91e600" />
+	</svg>
+</div>
+
+<script type="text/javascript" id="code-js-initialize">
+	var globalTimeline = new TimelineMax();
+</script>
+
+<script type="text/javascript" id="code-js">	
+	/*TweenLite.to("#svgRectangle", 1, {rotation:360, transformOrigin:"50% 50%"}, "+=1");*/
+	
+	CSSPlugin.defaultSmoothOrigin = false;
+	globalTimeline.to("#svgRectangle", 1, {rotation:360, transformOrigin:"50% 50%"}, "+=1");
+</script>
