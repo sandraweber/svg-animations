@@ -9,19 +9,24 @@
 .content-box {
 	display: flex;
 	justify-content: space-around;
+    flex-wrap: wrap;
 }
 
 #content-code, #content-live {
+    min-width: 550px;
 	width: 50%;
-	min-height: 250px; #TODO responsive
+	min-height: 350px; #TODO responsive
 }
 #content-control-time-slider {
 	margin-left: 15px;
 }
 #content-control-time-slider .slider-selection {
-	background: #BABABA;
+	background: #89cdef;
 }
-#content-control .btn {
+#content-control .btn.pull-right {
+	margin-left: 3px
+}
+#content-control .btn.btn-standard {
 	min-width: 100px;
 }
 

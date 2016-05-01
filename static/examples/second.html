@@ -12,7 +12,9 @@
 </div>
 
 <script type="text/javascript" id="code-js-initialize">
-	var globalTimeline = new TimelineMax();
+	if (!globalTimeline) {
+		globalTimeline = new TimelineMax();
+	}
 </script>
 
 <script type="text/javascript" id="code-js">	

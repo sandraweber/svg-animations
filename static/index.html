@@ -46,31 +46,30 @@
           <ul class="nav navbar-nav">
             <li><a href="#examples/first.html">Examples</a></li>
             <li><a href="#links">Links</a></li>
-            <li><a href="#about">About</a></li>
           </ul>
 		  
 		  <script type="text/javascript">
 			(function() {
-			function updateContent(){
-				var contentId = window.location.hash.substr(1);
-				if (contentId.startsWith('examples/')) {
-					contentId = 'example';
+				function updateContent(){
+					var contentId = window.location.hash.substr(1);
+					if (contentId.startsWith('examples/')) {
+						contentId = 'example';
+					}
+					if (!$('#content-'+contentId).attr('id')) {
+						window.location.href="#examples/first.html";
+					}
+					$(".navbar .nav").find(".active").removeClass("active");
+					$(".navbar .nav li a[href^='#"+contentId+"']").parent().addClass("active");
+				   
+					$(".content").removeClass("shown");
+					$("#content-"+contentId).addClass("shown");
+					
+					$('.CodeMirror').each(function(i, e){
+						e.CodeMirror.refresh();
+					});
 				}
-				if (!$('#content-'+contentId).attr('id')) {
-					window.location.href="#examples/first.html";
-				}
-				$(".nav").find(".active").removeClass("active");
-				$(".nav li a[href^='#"+contentId+"']").parent().addClass("active");
-			   
-				$(".content").removeClass("shown");
-				$("#content-"+contentId).addClass("shown");
-				
-				$('.CodeMirror').each(function(i, el){
-					el.CodeMirror.refresh();
-				});
-			}
-			window.addEventListener("hashchange", updateContent);
-			window.addEventListener("load", updateContent);
+				window.addEventListener("hashchange", updateContent);
+				window.addEventListener("load", updateContent);
 			})()
 		  </script>
         </div>
@@ -106,15 +105,15 @@
 			
 			<div id="content-code">
 				<div id="content-control">
-					<button type="button" id="content-control-resume" class="btn" style="display: none;" onclick="control.resumeTimeline()">		
+					<button type="button" id="content-control-resume" class="btn btn-standard" style="display: none;" onclick="control.resumeTimeline()">		
 						<span class="glyphicon glyphicon-play"></span>
 						Resume
 					</button>
-					<button type="button" id="content-control-pause" class="btn" onclick="control.pauseTimeline()">		
+					<button type="button" id="content-control-pause" class="btn btn-standard" onclick="control.pauseTimeline()">		
 						<span class="glyphicon glyphicon-pause"></span>
 						Pause
 					</button>
-					<button type="button" id="content-control-restart" class="btn" onclick="globalTimeline.restart()">		
+					<button type="button" id="content-control-restart" class="btn btn-standard" onclick="globalTimeline.restart()">		
 						<span class="glyphicon glyphicon-repeat"></span>
 						Restart
 					</button>
@@ -123,7 +122,9 @@
 					</span>
 					<button type="button" id="content-control-update" class="btn pull-right" title="Update with changes (Ctrl+S)" onclick="control.updateLiveContent()">		
 						<span class="glyphicon glyphicon-floppy-disk"></span>
-						Update
+					</button>
+					<button type="button" id="content-control-reset" class="btn pull-right" title="Reset changes" onclick="control.resetExample()" style="display: none">		
+						<span class="glyphicon glyphicon-remove"></span>
 					</button>
 				</div>
 				
