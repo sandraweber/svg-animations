@@ -11,13 +11,13 @@
 	</svg>
 </div>
 
-<script type="text/javascript" id="code-js-initialize">
-	if (!globalTimeline) {
-		globalTimeline = new TimelineMax();
-	}
-</script>
-
 <script type="text/javascript" id="code-js">	
+	globalTimeline = new TimelineMax({
+		onUpdate: function() {
+			if (control) { control.updateSlider() };
+		}
+	});
+	
 	/*TweenLite.to("#svgRectangle", 1, {rotation:360, transformOrigin:"50% 50%"}, "+=1");*/
 	
 	CSSPlugin.defaultSmoothOrigin = false;

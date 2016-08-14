@@ -18,6 +18,10 @@ var control = {
 		$('#content-control-reset').show();
 	},
 	
+	updateSlider: function() {
+		$('#content-control-time-slider input').data('slider').setValue(globalTimeline.totalProgress()*100);
+	},
+	
 	pauseTimeline: function() {
 		globalTimeline.pause();
 		$('#content-control-resume').show();
@@ -46,12 +50,6 @@ var control = {
 			return;
 		}
 		
-		globalTimeline = new TimelineMax({
-			onUpdate: function() {
-				$('#content-control-time-slider input').data('slider').setValue(globalTimeline.totalProgress()*100);
-			}
-		});
-		
 		if (localStorage.getItem(file)) {
 			$('#content-control-reset').show();
 			$('#content-live').empty().append(localStorage.getItem(file)).promise().done(function() {;
@@ -66,8 +64,8 @@ var control = {
 			});
 		}
 		function updateMeta(file, content, doUnindent) {
-			var svgContent = orEmpty($('#content-live #code-svg').html());
-			var jsContent = orEmpty($('#content-live #code-js').html());
+			var svgContent = $('#content-live #code-svg').html();
+			var jsContent = $('#content-live #code-js').html();
 			if (doUnindent) {
 				svgContent = unindent(svgContent);
 				jsContent = unindent(jsContent);
@@ -83,22 +81,15 @@ var control = {
 		function unindent(content) {
 			return content.replace(/\n\t/g, '\n');
 		}
-		function orEmpty(content) {
-			return content ? content : '';
-		}
-		function cutOutScript(content) {
-			var startRegex = new RegExp("<script .* id=\"code-js\"[^>]*>", "g");
-			var index = content.search(startRegex);
-			if (index==-1) {
-				return '';
-			}
-			var contentPart = content.substr(index+content.match(startRegex)[0].length);
-			index = contentPart.search("</script>");
-			if (index==-1) {
-				return '';
-			}			
-			return contentPart.substr(0, index);
-		}
+	},
+	
+	saveToLocalFile: function() {
+		var content = 'data:text;charset=utf-8,';
+		content += '<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>\r\n';	
+		content += '<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/easing/EasePack.min.js"></script>\r\n';
+		content += '<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/CSSPlugin.min.js"></script>\n\n';
+		content += svgEditor.getValue();
+		window.open(content, 'Download');
 	}
 };
 	

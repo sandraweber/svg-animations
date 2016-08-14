@@ -105,21 +105,21 @@
 			
 			<div id="content-code">
 				<div id="content-control">
-					<button type="button" id="content-control-resume" class="btn btn-standard" style="display: none;" onclick="control.resumeTimeline()">		
+					<button type="button" id="content-control-resume" class="btn" style="display: none;" title="Resume" onclick="control.resumeTimeline()">		
 						<span class="glyphicon glyphicon-play"></span>
-						Resume
 					</button>
-					<button type="button" id="content-control-pause" class="btn btn-standard" onclick="control.pauseTimeline()">		
+					<button type="button" id="content-control-pause" class="btn" title="Pause" onclick="control.pauseTimeline()">		
 						<span class="glyphicon glyphicon-pause"></span>
-						Pause
 					</button>
-					<button type="button" id="content-control-restart" class="btn btn-standard" onclick="globalTimeline.restart()">		
+					<button type="button" id="content-control-restart" class="btn" title="Restart" onclick="globalTimeline.restart()">		
 						<span class="glyphicon glyphicon-repeat"></span>
-						Restart
 					</button>
 					<span id="content-control-time-slider">
 						<input data-slider-id='time-slider' type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0"/>
 					</span>
+					<button type="button" id="content-control-save" class="btn pull-right" title="Save changes to local file" onclick="control.saveToLocalFile()">		
+						<span class="glyphicon glyphicon-save"></span>
+					</button>
 					<button type="button" id="content-control-update" class="btn pull-right" title="Update with changes (Ctrl+S)" onclick="control.updateLiveContent()">		
 						<span class="glyphicon glyphicon-floppy-disk"></span>
 					</button>
