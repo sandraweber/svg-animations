@@ -6,10 +6,21 @@ var control = {
 		$('#content-example-title-changed').hide();
 	
 		globalTimeline.clear();
-		$('#content-live #code-svg').html(svgEditor.getValue());
-		$('#content-live #code-js').html(jsEditor.getValue()); // this is needed to later save js to localStorage
-		new Function(jsEditor.getValue())(); // this is needed for js execution
-		var newContent = $('#content-live').html();
+		var newSvgContent = svgEditor.getValue();
+		var newJsContent = jsEditor.getValue();
+		
+		// Update live view
+		$('#content-live #code-svg').html(newSvgContent);
+		$('#content-live #code-js').html(newJsContent); // this is needed to later save js to localStorage
+		new Function(newJsContent)(); // this is needed for js execution
+				
+		// Update editor tab 'all'
+		var original = $(document.createElement( 'div' ));
+		original.html(allEditor.getValue());
+		original.find('#code-svg').html(newSvgContent);
+		original.find('#code-js').html(newJsContent);
+		var newContent = original.html();
+		
 		localStorage.setItem(control.getFile(), newContent);
 		allEditor.setValue(newContent);
 		
@@ -64,15 +75,17 @@ var control = {
 			});
 		}
 		function updateMeta(file, content, doUnindent) {
-			var svgContent = $('#content-live #code-svg').html();
-			var jsContent = $('#content-live #code-js').html();
+			var original = $(document.createElement( 'div' ));
+			original.html(content);
+			var svgContent = original.find('#code-svg').html();
+			var jsContent = original.find('#code-js').html();
 			if (doUnindent) {
 				svgContent = unindent(svgContent);
 				jsContent = unindent(jsContent);
 			}
 			svgEditor.setValue(svgContent);
 			jsEditor.setValue(jsContent);
-			allEditor.setValue($('#content-live').html());
+			allEditor.setValue(content);
 			
 			$('#content-example-title-changed').hide();
 			var exampleTitle = $('ul#content-example-selection li a[href="#'+file+'"]').text();
