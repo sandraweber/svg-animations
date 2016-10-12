@@ -83,13 +83,16 @@ var control = {
 		}
 	},
 	
-	saveToLocalFile: function() {
-		var content = 'data:text;charset=utf-8,';
-		content += '<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>\r\n';	
-		content += '<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/easing/EasePack.min.js"></script>\r\n';
-		content += '<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/CSSPlugin.min.js"></script>\n\n';
-		content += svgEditor.getValue();
-		window.open(content, 'Download');
+	saveToLocalFile: function() {		
+		var temporaryLink = document.createElement('a');
+		temporaryLink.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(allEditor.getValue()));
+		temporaryLink.setAttribute('download', 'svgExample.html');
+
+		temporaryLink.style.display = 'none';
+		document.body.appendChild(temporaryLink);
+
+		temporaryLink.click();
+		document.body.removeChild(temporaryLink);
 	}
 };
 	
