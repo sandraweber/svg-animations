@@ -5,21 +5,24 @@
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/CSSPlugin.min.js"></script>
 </div>
 
-<div id="code-svg">
-	<svg width="500" height="300"  >
-		<rect id="svgRectangle" class="animated" x="100" y="120" width="220" height="80" fill="red" />
-	</svg>
+<div id="code-svg"><div style="text-align:center">
+ 	<div id="text1">This is an awesome presentation.</div>
+	<div id="text2" style="opacity: 0">But you know ...</div>
+	<div id="text3" style="opacity: 0">... you should just try it yourself</div>
+  	<div id="link" style="opacity: 0; font-size: 3em">
+ 		<a href="http://svg.websome.ch">svg.websome.ch</a>
+  	</div>
+</div>
 </div>
 
 <script type="text/javascript" id="code-js">	
-	globalTimeline = new TimelineMax({
-		onUpdate: function() {
-			if (control) { control.updateSlider() };
-		}
-	});
-	
-	/*TweenLite.to("#svgRectangle", 1, {rotation:360, transformOrigin:"50% 50%"}, "+=1");*/
-	
-	CSSPlugin.defaultSmoothOrigin = false;
-	globalTimeline.to("#svgRectangle", 1, {rotation:360, transformOrigin:"50% 50%"}, "+=1");
+globalTimeline = new TimelineMax({
+	onUpdate: function() {
+		if (control) { control.updateSlider() };
+	}
+});
+globalTimeline.to("#text1", 1, {opacity:0, y: 30}, "+=1");
+globalTimeline.to("#text2", 1, {opacity:1});
+globalTimeline.to("#text3", 1, {opacity:1});
+globalTimeline.to("#link", 2, {opacity:1, y: 100, ease: Bounce.easeOut});
 </script>
