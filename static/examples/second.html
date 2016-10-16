@@ -19,7 +19,7 @@
 <script type="text/javascript" id="code-js">	
 globalTimeline = new TimelineMax({
 	onUpdate: function() {
-		if (control) { control.updateSlider() };
+		try { control.updateSlider() } catch(e) {};
 	}
 });
 globalTimeline.to("#text1", 1, {opacity:0, y: 30}, "+=1");

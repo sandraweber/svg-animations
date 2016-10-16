@@ -14,7 +14,7 @@
 <script type="text/javascript" id="code-js">
 	globalTimeline = new TimelineMax({
 		onUpdate: function() {
-			if (control) { control.updateSlider() };
+			try { control.updateSlider() } catch(e) {};
 		}
 	});
 		

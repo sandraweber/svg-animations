@@ -1,0 +1,40 @@
+
+<div id="code-includes">
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
+	<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/Draggable-latest-beta.js"></script>
+</div>
+
+<div id="code-svg">
+	<svg width="300px" height="300px">
+		<rect id="fill" x="0" y="0" width="70" height="300" fill="#0000ff"></rect>
+		<g>
+			<circle cx="190" cy="140" r="90" fill="silver"/>
+			<circle id="gear" cx="200" cy="70" r="10" fill="darkgrey"/>
+		</g>
+	</svg>
+</div>
+
+<script type="text/javascript" id="code-js">
+globalTimeline = new TimelineMax({
+	onUpdate: function() {
+		try { control.updateSlider() } catch(e) {};
+	}
+});
+TweenLite.set("#gear", {transformOrigin:"0px 80px"});
+globalTimeline.pause();
+globalTimeline.to("#fill", 1, {fill:'#ff0000'});
+	
+Draggable.create("#gear", {
+	type: "rotation", 
+	throwProps: true, 
+	bounds: {
+		minRotation: 0,
+		maxRotation: 360
+	},
+	onDrag: function() {
+		console.log("Progress: "+(this.rotation)/360 );
+		globalTimeline.progress((this.rotation)/360 );
+		globalTimeline.pause();
+	}
+});
+</script>
