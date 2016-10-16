@@ -88,6 +88,7 @@ var control = {
 			allEditor.setValue(content);
 			
 			$('#content-example-title-changed').hide();
+			$('#content-example-title-link').attr('href', file);
 			var exampleTitle = $('ul#content-example-selection li a[href="#'+file+'"]').text();
 			$('#content-example-title-text').html(exampleTitle);
 		}
