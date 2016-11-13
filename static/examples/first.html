@@ -15,6 +15,9 @@
 	globalTimeline = new TimelineMax({
 		onUpdate: function() {
 			try { control.updateSlider() } catch(e) {};
+		},
+		onComplete: function() {
+			this.restart();
 		}
 	});
 		
